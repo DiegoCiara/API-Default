@@ -1,0 +1,26 @@
+services:
+  # app:
+  #   image: teste
+  #   build: .
+  #   command: npm run dev
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - '3333:3333'
+  #   volumes:
+  #     - .:/usr/app
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - '${DB_PORT}:5432'
+
+# portas utilizadas:
+# - 5500: wave
